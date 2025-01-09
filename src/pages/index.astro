@@ -1,11 +1,214 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+// Importaciones de componentes de React (si los necesitas)
+import Navbar from "@/components/NavBar.tsx";
+import ProductCard from "@/components/ProductCard.tsx";
+import Confetti from "@/components/Confetti.tsx";
+import ChatSupport from "@/components/ChatSupport";
+import { Button } from "@/components/ui/button.tsx";
+import Layout from "@layouts/Layout.astro"
+import { PartyPopper, Gift, Phone, Sparkles, Star } from "lucide-react";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Datos estáticos (puedes moverlos a un archivo JSON si prefieres)
+const bestSellers = [
+  {
+    name: "Kit Decoración Cumpleaños",
+    price: "$299.99",
+    image: "/placeholder.svg",
+    category: "Cumpleaños"
+  },
+  {
+    name: "Guirnalda LED Mágica",
+    price: "$149.99",
+    image: "/placeholder.svg",
+    category: "Iluminación"
+  },
+  {
+    name: "Set Globos Metálicos",
+    price: "$89.99",
+    image: "/placeholder.svg",
+    category: "Globos"
+  },
+  {
+    name: "Centro de Mesa Elegante",
+    price: "$199.99",
+    image: "/placeholder.svg",
+    category: "Centros de Mesa"
+  }
+];
+
+const galleryEvents = [
+  {
+    title: "Boda Romántica",
+    description: "Decoración en tonos rosados y dorados",
+    image: "/placeholder.svg",
+    date: "Marzo 2024"
+  },
+  {
+    title: "XV Años Mágicos",
+    description: "Tema de mariposas y flores",
+    image: "/placeholder.svg",
+    date: "Febrero 2024"
+  },
+  {
+    title: "Baby Shower",
+    description: "Decoración en tonos pasteles",
+    image: "/placeholder.svg",
+    date: "Enero 2024"
+  }
+];
 ---
 
 <Layout>
-	<Welcome />
+<div class="min-h-screen">
+	<Navbar />
+	<Confetti />
+	<ChatSupport />
+	
+	{/* Hero Section - Nuevo diseño con colores pasteles */}
+	<section id="home" class="pt-24 pb-12 px-4 bg-gradient-to-br from-pink-100 via-purple-50 to-blue-100 relative overflow-hidden">
+	  <div class="absolute inset-0 bg-[url('/placeholder.svg')] opacity-5"></div>
+	  <div class="max-w-7xl mx-auto text-center relative">
+		<div class="inline-block animate-float">
+		  <Sparkles className="h-12 w-12 text-pink-400 mb-4" />
+		</div>
+		<h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-6">
+		  Creamos{" "}
+		  <span class="text-pink-400">Momentos</span>{" "}
+		  <span class="bg-gradient-to-r from-pink-400 to-blue-400 bg-clip-text text-transparent">
+			Mágicos
+		  </span>
+		</h1>
+		<p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+		  Transformamos espacios ordinarios en experiencias extraordinarias para tus eventos especiales
+		</p>
+		<div class="flex gap-4 justify-center">
+		  <Button className="bg-pink-400 hover:bg-pink-500 text-white">
+			<PartyPopper className="mr-2 h-5 w-5" />
+			Ver Catálogo
+		  </Button>
+		  <Button variant="outline" className="border-pink-400 hover:bg-pink-50">
+			<Star className="mr-2 h-5 w-5" />
+			Cotizar Ahora
+		  </Button>
+		</div>
+		<div class="mt-12 flex justify-center gap-8">
+		  <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm">
+			<h3 class="font-semibold">+500</h3>
+			<p class="text-sm text-gray-600">Eventos Realizados</p>
+		  </div>
+		  <div class="bg-white/80 backdrop-blur-sm p-4 rounded-lg shadow-sm">
+			<h3 class="font-semibold">100%</h3>
+			<p class="text-sm text-gray-600">Clientes Felices</p>
+		  </div>
+		</div>
+	  </div>
+	</section>
+
+	{/* Best Sellers Section */}
+	<section id="products" class="py-16 px-4 bg-gradient-to-b from-blue-50 to-pink-50">
+	  <div class="max-w-7xl mx-auto">
+		<div class="text-center mb-12">
+		  <h2 class="text-3xl font-bold text-gray-800 mb-4">
+			Los más vendidos
+		  </h2>
+		  <p class="text-gray-600">
+			Nuestros productos favoritos por nuestros clientes
+		  </p>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+		  {bestSellers.map((product, index) => (
+			<ProductCard key={index} {...product} />
+		  ))}
+		</div>
+	  </div>
+	</section>
+
+	{/* Galería Section */}
+	<section id="gallery" class="py-16 px-4 bg-gradient-to-b from-pink-50 to-purple-50">
+	  <div class="max-w-7xl mx-auto">
+		<div class="text-center mb-12">
+		  <h2 class="text-3xl font-bold text-gray-800 mb-4">
+			Nuestra Galería
+		  </h2>
+		  <p class="text-gray-600">
+			Momentos mágicos que hemos creado para nuestros clientes
+		  </p>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		  {galleryEvents.map((event, index) => (
+			<div 
+			  key={index}
+			  class="group relative overflow-hidden rounded-2xl shadow-md hover:shadow-xl transition-all duration-300"
+			>
+			  <img 
+				src={event.image} 
+				alt={event.title}
+				class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110"
+			  />
+			  <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+				<div class="absolute bottom-0 left-0 right-0 p-6 text-white">
+				  <h3 class="text-xl font-semibold mb-2">{event.title}</h3>
+				  <p class="text-sm mb-2">{event.description}</p>
+				  <span class="text-xs opacity-75">{event.date}</span>
+				</div>
+			  </div>
+			</div>
+		  ))}
+		</div>
+	  </div>
+	</section>
+
+	{/* Services Section */}
+	<section id="services" class="py-16 px-4 bg-gradient-to-b from-purple-50 to-blue-50">
+	  <div class="max-w-7xl mx-auto">
+		<div class="text-center mb-12">
+		  <h2 class="text-3xl font-bold text-gray-800 mb-4">
+			Nuestros Servicios
+		  </h2>
+		  <p class="text-gray-600">
+			Todo lo que necesitas para tu evento especial
+		  </p>
+		</div>
+		<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+		  <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+			<Gift className="w-12 h-12 text-pink-400 mb-4" />
+			<h3 class="text-xl font-semibold mb-2">Decoración Completa</h3>
+			<p class="text-gray-600">
+			  Diseñamos y decoramos todo el espacio de tu evento
+			</p>
+		  </div>
+		  <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+			<PartyPopper className="w-12 h-12 text-pink-400 mb-4" />
+			<h3 class="text-xl font-semibold mb-2">Eventos Temáticos</h3>
+			<p class="text-gray-600">
+			  Creamos ambientes únicos según tu tema preferido
+			</p>
+		  </div>
+		  <div class="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+			<Phone className="w-12 h-12 text-pink-400 mb-4" />
+			<h3 class="text-xl font-semibold mb-2">Asesoría Personal</h3>
+			<p class="text-gray-600">
+			  Te ayudamos a elegir la mejor decoración para tu evento
+			</p>
+		  </div>
+		</div>
+	  </div>
+	</section>
+
+	{/* Contact Section */}
+	<section id="contact" class="py-16 px-4 bg-gradient-to-b from-blue-50 to-pink-50">
+	  <div class="max-w-7xl mx-auto text-center">
+		<h2 class="text-3xl font-bold text-gray-800 mb-4">
+		  ¿Listo para decorar tu evento?
+		</h2>
+		<p class="text-gray-600 mb-8">
+		  Contáctanos y haremos realidad tu visión
+		</p>
+		<Button className="bg-pink-400 hover:bg-pink-500 text-white">
+		  <Phone className="mr-2 h-5 w-5" />
+		  Contactar
+		</Button>
+	  </div>
+	</section>
+  </div>
 </Layout>
