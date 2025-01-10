@@ -39,14 +39,14 @@ const ChatSupport = () => {
       {!isOpen && (
         <Button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 rounded-full p-4 bg-pink-400 hover:bg-pink-500"
+          className="fixed bottom-4 z-50 right-4 rounded-full p-4 bg-pink-400 hover:bg-pink-500"
         >
           <MessageSquare className="h-6 w-6" />
         </Button>
       )}
 
       {isOpen && (
-        <Card className="fixed bottom-4 right-4 w-80 h-96 flex flex-col shadow-lg">
+        <Card className="fixed z-50 bottom-4 right-4 w-80 h-96 flex flex-col shadow-lg">
           <div className="p-4 bg-pink-400 text-white rounded-t-lg flex justify-between items-center">
             <h3 className="font-semibold">Chat de Soporte</h3>
             <Button
