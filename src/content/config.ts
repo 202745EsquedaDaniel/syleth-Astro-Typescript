@@ -11,4 +11,15 @@ const product = defineCollection({
     }),
 });
 
-export const collections = { product };
+const gallery = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        imageUrl: z.string(),
+        pubDate: z.coerce.date(),
+        category: z.string(),
+    }),
+});
+
+export const collections = { product, gallery };
